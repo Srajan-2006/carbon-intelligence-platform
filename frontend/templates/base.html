@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Mine Carbon Intelligence{% endblock %} · Carbon &amp; Operations Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+{% block extra_head %}{% endblock %}
+</head>
+<body>
+<div class="app-shell">
+  <nav class="sidebar">
+    <div class="sidebar-brand">Mine Carbon<br>Intelligence</div>
+    <div class="sidebar-tagline">CARBON &amp; OPERATIONS COMMAND CENTER</div>
+    <ul class="sidebar-nav">
+      <li><a href="{{ url_for('page_dashboard') }}" class="{{ 'active' if active=='dashboard' else '' }}"><span class="step-no">01</span>Command Center</a></li>
+      <li><a href="{{ url_for('page_footprint') }}" class="{{ 'active' if active=='footprint' else '' }}"><span class="step-no">02</span>Carbon Footprint</a></li>
+      <li><a href="{{ url_for('page_hotspots') }}" class="{{ 'active' if active=='hotspots' else '' }}"><span class="step-no">03</span>Hotspot Analysis</a></li>
+      <li><a href="{{ url_for('page_optimizer') }}" class="{{ 'active' if active=='optimizer' else '' }}"><span class="step-no">04</span>Decarbonization Optimizer</a></li>
+      <li><a href="{{ url_for('page_simulator') }}" class="{{ 'active' if active=='simulator' else '' }}"><span class="step-no">05</span>Intervention Simulator</a></li>
+      <li><a href="{{ url_for('page_roadmap') }}" class="{{ 'active' if active=='roadmap' else '' }}"><span class="step-no">06</span>Net-Zero Roadmap</a></li>
+      <li><a href="{{ url_for('page_methodology') }}" class="{{ 'active' if active=='methodology' else '' }}"><span class="step-no">07</span>Data &amp; Methodology</a></li>
+    </ul>
+    {% if current_user and current_user.role in ('ADMIN', 'MINE_MANAGER', 'ANALYST') %}
+    <div class="sidebar-workflow" style="border-top:none; margin-top:0.6rem; padding-top:0;">
+      <a href="{{ url_for('page_mine_management') }}" class="{{ 'active' if active=='mines' else '' }}" style="display:flex; align-items:center; gap:0.55em; text-decoration:none; padding:0.6em 0.7em; border-radius:2px; color:var(--sidebar-ink-dim); font-family:var(--font-body); font-size:0.85rem; border-left:2px solid {{ 'var(--good)' if active=='mines' else 'transparent' }}; {{ 'color:#fff; background:rgba(255,255,255,0.06);' if active=='mines' else '' }}">
+        <span class="step-no" style="font-family:var(--font-mono); font-size:0.7rem; width:1.4em;">&#9670;</span>Mine Management
+      </a>
+    </div>
+    {% endif %}
+    <div class="sidebar-workflow">
+      MEASURE &rarr; DIAGNOSE<br>
+      &rarr; SIMULATE &rarr; OPTIMIZE<br>
+      &rarr; ROADMAP
+    </div>
+    {% if current_user %}
+    <div class="sidebar-account">
+      <div class="sidebar-account-label">ACCOUNT</div>
+      <div class="sidebar-account-name">{{ current_user.name }}</div>
+      <div class="sidebar-account-role">{{ current_user.role }}{% if current_user.mine_id %} &middot; {{ current_user.mine_id }}{% endif %}</div>
+      <button type="button" id="sidebar-logout-btn" class="btn-secondary" style="width:100%; margin-top:0.6rem; font-size:0.72rem; padding:0.5em 0.8em;">Logout</button>
+    </div>
+    {% endif %}
+  </nav>
+  <main class="main">
+    {% block content %}{% endblock %}
+  </main>
+</div>
+<script>
+  window.MCI_URLS = {
+    dashboard: "{{ url_for('page_dashboard') }}",
+    footprint: "{{ url_for('page_footprint') }}",
+    hotspots: "{{ url_for('page_hotspots') }}",
+    optimizer: "{{ url_for('page_optimizer') }}",
+    simulator: "{{ url_for('page_simulator') }}",
+    roadmap: "{{ url_for('page_roadmap') }}",
+    methodology: "{{ url_for('page_methodology') }}",
+    mines: "{{ url_for('page_mine_management') }}",
+    login: "{{ url_for('page_login') }}"
+  };
+</script>
+<script src="{{ url_for('static', filename='js/common.js') }}"></script>
+<script>
+  (function () {
+    var btn = document.getElementById("sidebar-logout-btn");
+    if (btn) {
+      btn.addEventListener("click", async function () {
+        btn.disabled = true;
+        try { await MCI.apiPost("/auth/logout", {}); } catch (e) {}
+        window.location.href = window.MCI_URLS.login;
+      });
+    }
+  })();
+</script>
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

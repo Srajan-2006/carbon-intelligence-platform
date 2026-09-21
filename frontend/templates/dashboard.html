@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Command Center{% endblock %}
+{% block content %}
+
+<div class="cmd-header contour-hero">
+  <svg class="contour-bg" viewBox="0 0 900 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="none" stroke="#6B7570" stroke-width="1">
+      <path d="M0,160 C170,120 280,200 450,150 C620,100 730,180 900,130"/>
+      <path d="M0,180 C170,140 280,220 450,170 C620,120 730,200 900,150"/>
+      <path d="M0,200 C170,160 280,240 450,190 C620,140 730,220 900,170"/>
+      <path d="M0,140 C170,100 280,180 450,130 C620,80 730,160 900,110"/>
+    </g>
+  </svg>
+  <div class="contour-content cmd-header-row">
+    <div>
+      <div class="eyebrow">Carbon &amp; Operations</div>
+      <h1>Command Center</h1>
+      <p class="lede" style="margin:0.35em 0 0; max-width:56ch;">Mine-wide carbon performance, operational signals and decarbonization decisions.</p>
+      <div id="cmd-header-meta" class="cmd-header-meta">Loading selected mine&hellip;</div>
+    </div>
+    <div class="cmd-header-controls">
+      <div>
+        <label for="mine-select">Mine</label>
+        <select id="mine-select" aria-label="Select mine"></select>
+      </div>
+      {% if current_user %}
+      <div class="cmd-user-chip">
+        <div class="cmd-user-name">{{ current_user.name }}</div>
+        <div class="cmd-user-role">{{ current_user.role }}</div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div id="provenance-strip" class="provenance-strip"><span class="loading-text">Loading data status&hellip;</span></div>
+
+<div id="cmd-body">
+  <div class="loading-text">Loading command center&hellip;</div>
+</div>
+
+{% endblock %}
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

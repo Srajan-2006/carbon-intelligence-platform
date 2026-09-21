@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Data & Methodology{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <div class="eyebrow">For Technical Reviewers</div>
+    <h1>Data &amp; Methodology</h1>
+    <p class="lede">How emissions are calculated, how interventions are modeled, how the optimizer works, and — most importantly — what in this prototype is real vs. synthetic.</p>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:1rem;">
+  <div class="card-header"><h3>Data Architecture</h3></div>
+  <div class="mono" style="font-size:0.82rem; line-height:2.1; color:var(--ink-muted);">
+    Mine Master &rarr; Operational Activity &rarr; Emission Factors &rarr; Carbon Calculation &rarr; Interventions &rarr; Optimizer &rarr; Roadmap &rarr; KPIs
+  </div>
+  <p style="margin-top:0.8rem;">Every derived number traces back to activity data &times; an emission factor. Optimizer recommendations trace back to a baseline + intervention assumptions + budget + target, logged per run for audit.</p>
+</div>
+
+<div class="grid-2">
+  <div class="card">
+    <div class="card-header"><h3>Scope Definitions</h3></div>
+    <table class="data-table">
+      <tbody>
+        <tr><td><span class="scope-pill s1">Scope 1</span></td><td>Direct emissions: diesel/fuel combustion in mine equipment, plus fugitive methane (converted to CO2e via GWP100).</td></tr>
+        <tr><td><span class="scope-pill s2">Scope 2</span></td><td>Emissions from purchased grid electricity, net of any on-site/contracted renewable share.</td></tr>
+        <tr><td><span class="scope-pill s3">Scope 3</span></td><td>Selected indirect emissions this prototype models: outbound road transport and employee commuting. Other Scope 3 categories are not yet covered.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-header"><h3>Provenance Legend</h3></div>
+    <div id="provenance-legend"></div>
+  </div>
+</div>
+
+<div class="card" style="margin:1rem 0;">
+  <div class="card-header"><h3>Emission Factors In Use</h3></div>
+  <div id="factors-table"><div class="loading-text">Loading emission factors&hellip;</div></div>
+</div>
+
+<div class="card" style="margin-bottom:1rem;">
+  <div class="card-header"><h3>Worked Example: Activity &times; Factor = CO2e</h3></div>
+  <div id="calc-sample"><div class="loading-text">Loading sample calculation&hellip;</div></div>
+</div>
+
+<div class="card" style="margin-bottom:1rem;">
+  <div class="card-header"><h3>Intervention Modeling &amp; the Scope 1/Scope 2 Interaction</h3></div>
+  <p>Each intervention in the library declares a fractional effect on Scope 1 and/or Scope 2 (and Scope 3 where relevant) at full deployment. Effects scale linearly with deployment level and accumulate as fractions of the mine's own baseline — they are never chained as independent multiplied percentages.</p>
+  <div class="explain-box">Electric haul trucks are the clearest example: converting diesel trucks to electric reduces diesel-related Scope 1 emissions, but the added electricity demand for charging increases Scope 2. The optimizer and simulator both compute <strong>Scope 1 reduction and Scope 2 increase jointly</strong> and report the net tCO2e effect — never a flat isolated "X% reduction."</div>
+  <div id="interventions-table" style="margin-top:1rem;"><div class="loading-text">Loading intervention library&hellip;</div></div>
+</div>
+
+<div class="card" style="margin-bottom:1rem;">
+  <div class="card-header"><h3>How The Optimizer Works</h3></div>
+  <p>Given a mine's baseline emissions, the intervention library, an investment budget and a target reduction percentage, the optimizer performs an <strong>exhaustive search</strong> over discrete deployment-level combinations (min &rarr; max, in fixed steps, per intervention). This is appropriate at this prototype's scale — a handful of interventions with a few levels each — and guarantees the true minimum-cost feasible package rather than a heuristic approximation. At a larger scale, this would be replaced with a formal MILP/MINLP formulation.</p>
+  <p>If a combination exists that meets the target within budget, the cheapest such combination is returned with status <span class="mono">TARGET_MET</span>. If none does, the optimizer reports <span class="mono">TARGET_NOT_FEASIBLE_WITHIN_BUDGET</span> along with the best achievable reduction and the remaining gap — it never reports success that wasn't actually found.</p>
+</div>
+
+<div class="card">
+  <div class="card-header"><h3>Limitations</h3></div>
+  <ul style="color:var(--ink-muted); line-height:1.8; margin:0; padding-left:1.2em;">
+    <li>Mine-level operational data (PM001, PM002, PM003) is <strong>synthetic prototype data</strong>, fabricated to demonstrate the architecture. It is not a measurement of any real mine.</li>
+    <li>Intervention costs and impact fractions are illustrative assumptions, not engineering-validated figures.</li>
+    <li>Scope 3 coverage is partial (transport and commuting only).</li>
+    <li>The optimizer uses exhaustive search appropriate to prototype scale, not production-grade mathematical programming.</li>
+    <li>Results are estimates under prototype assumptions — not a guarantee of real-world savings.</li>
+    <li>Production deployment requires replacing the synthetic operational layer with verified mine data, meters, and engineering studies, while retaining the carbon engine, intervention model, optimizer and UI.</li>
+  </ul>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/methodology.js') }}"></script>
+{% endblock %}

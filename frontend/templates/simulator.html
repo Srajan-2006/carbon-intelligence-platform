@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Intervention Simulator{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <div class="eyebrow">Step 03 &middot; Simulate</div>
+    <h1>Intervention Simulator</h1>
+    <p class="lede">Manually explore intervention deployment levels and see the modeled effect on Scope 1 / 2 / 3, investment and residual emissions — the same calculation logic used by the optimizer.</p>
+  </div>
+  <div>
+    <label for="mine-select">Mine</label>
+    <select id="mine-select" aria-label="Select mine"></select>
+  </div>
+</div>
+
+<div class="provenance-strip" style="border-left-color: var(--scope2);">
+  <span><strong>Scenario Simulation</strong></span>
+  <span>Values below are computed live via <code class="mono">/api/simulate</code> and represent modeled estimates under prototype assumptions — not actual measurements.</span>
+</div>
+
+<div id="simulator-body">
+  <div class="loading-text">Loading intervention library&hellip;</div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/simulator.js') }}"></script>
+{% endblock %}

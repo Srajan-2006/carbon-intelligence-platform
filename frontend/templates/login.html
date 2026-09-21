@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In &middot; Mine Carbon Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+</head>
+<body class="auth-body">
+  <div class="auth-shell">
+    <div class="auth-terrain">
+      <svg class="terrain-svg" viewBox="0 0 900 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g fill="none" stroke="#3A463D" stroke-width="1">
+          <path d="M-50,650 C150,580 250,720 450,640 C650,560 750,700 950,600"/>
+          <path d="M-50,700 C150,630 250,770 450,690 C650,610 750,750 950,650"/>
+          <path d="M-50,750 C150,680 250,820 450,740 C650,660 750,800 950,700"/>
+          <path d="M-50,600 C150,530 250,670 450,590 C650,510 750,650 950,550"/>
+          <path d="M-50,550 C150,480 250,620 450,540 C650,460 750,600 950,500"/>
+          <path d="M-50,500 C150,430 250,570 450,490 C650,410 750,550 950,450"/>
+          <path d="M-50,450 C150,380 250,520 450,440 C650,360 750,500 950,400"/>
+        </g>
+      </svg>
+      <div class="auth-brand">
+        <div class="auth-brand-mark">MCI</div>
+        <div class="auth-brand-title">MINE CARBON<br>INTELLIGENCE</div>
+        <div class="auth-brand-sub">CARBON &amp; OPERATIONS DECISION-SUPPORT PLATFORM</div>
+        <div class="auth-brand-note">SYNTHETIC PROTOTYPE DATA &middot; NOT REAL-TIME MINE DATA</div>
+      </div>
+    </div>
+
+    <div class="auth-panel">
+      <div class="auth-card">
+        <h1 class="auth-heading">Sign In</h1>
+        <p class="auth-subheading">Access your mine's carbon intelligence workspace.</p>
+
+        <div id="auth-error" class="auth-error" hidden></div>
+
+        <form id="login-form" novalidate>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="username" required aria-required="true">
+
+          <label for="password" style="margin-top:1em;">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required aria-required="true">
+
+          <button type="submit" id="login-submit" style="width:100%; margin-top:1.4em;">Sign In</button>
+        </form>
+
+        <p class="auth-switch">Don't have an account? <a href="{{ url_for('page_register') }}">Register</a></p>
+
+        <p class="footnote" style="margin-top:1.6rem;">Prototype authentication for demonstration purposes. See Data &amp; Methodology for data provenance and security limitations.</p>
+      </div>
+    </div>
+  </div>
+  <script>window.MCI_NEXT_URL = {{ (next_url or "")|tojson }};</script>
+  <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+</body>
+</html>

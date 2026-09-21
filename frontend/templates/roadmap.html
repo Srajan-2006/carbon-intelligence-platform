@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Net-Zero Roadmap{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <div class="eyebrow">Step 05 &middot; Roadmap</div>
+    <h1>Net-Zero Roadmap</h1>
+    <p class="lede">A long-term decarbonization pathway built from intervention milestones — planning assumptions, not commitments.</p>
+  </div>
+  <div>
+    <label for="mine-select">Mine</label>
+    <select id="mine-select" aria-label="Select mine"></select>
+  </div>
+</div>
+
+<div id="roadmap-provenance" class="provenance-strip"><span class="loading-text">Loading data status&hellip;</span></div>
+
+<div id="roadmap-body">
+  <div class="loading-text">Loading roadmap&hellip;</div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/roadmap.js') }}"></script>
+{% endblock %}

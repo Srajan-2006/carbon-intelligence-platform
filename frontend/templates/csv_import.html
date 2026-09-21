@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}CSV Import{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <div class="eyebrow">Mine Management &middot; CSV Import</div>
+    <h1>CSV Import — <span class="mono">{{ mine_id }}</span></h1>
+    <p class="lede">Upload monthly operational data in bulk. Nothing is written to the database until you review the preview and explicitly confirm.</p>
+  </div>
+  <div>
+    <a href="{{ url_for('page_operational_data', mine_id=mine_id) }}" class="footnote">&larr; Back to Operational Data</a>
+  </div>
+</div>
+
+<div id="ci-role-banner" class="provenance-strip" style="display:none;"></div>
+
+<div class="card" style="margin-bottom:1rem;">
+  <div class="card-header"><h3>1. Get the Template</h3></div>
+  <p>Download the CSV template, built directly from the fields the carbon engine actually uses. Replace the single example row with real monthly data — do not import the example row as-is.</p>
+  <a class="btn-secondary btn" href="/api/mine/{{ mine_id }}/data/template" style="display:inline-block; text-decoration:none;">Download Template</a>
+</div>
+
+<div class="card" style="margin-bottom:1rem;">
+  <div class="card-header"><h3>2. Upload &amp; Validate</h3></div>
+  <form id="upload-form">
+    <input type="file" id="ci-file-input" accept=".csv" aria-label="Choose CSV file">
+    <button type="submit" id="ci-validate-btn" style="margin-top:1rem;">Upload &amp; Validate</button>
+  </form>
+  <div id="ci-upload-error" class="auth-error" hidden style="margin-top:1rem;"></div>
+</div>
+
+<div id="ci-preview-section" style="display:none;">
+  <div class="cmd-section-title">3. Review Preview</div>
+  <div id="ci-summary-kpis" class="kpi-grid" style="grid-template-columns:repeat(4,1fr);"></div>
+  <div class="card">
+    <div class="card-header"><h3>Row-by-Row Result</h3></div>
+    <div id="ci-preview-table"></div>
+  </div>
+  <div class="card" style="margin-top:1rem;">
+    <div id="ci-confirm-status"></div>
+    <button type="button" id="ci-confirm-btn" style="margin-top:0.8rem;">Confirm Import</button>
+    <button type="button" id="ci-cancel-btn" class="btn-secondary" style="margin-top:0.8rem; margin-left:0.6rem;">Cancel</button>
+  </div>
+</div>
+
+<div id="ci-result-section" style="display:none;">
+  <div class="status-banner met"><span class="dot"></span>Import Complete</div>
+  <div id="ci-result-body" class="card"></div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script>window.MCI_MINE_ID = {{ mine_id|tojson }};</script>
+<script src="{{ url_for('static', filename='js/csv_import.js') }}"></script>
+{% endblock %}

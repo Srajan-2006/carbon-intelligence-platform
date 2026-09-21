@@ -1,0 +1,15 @@
+mine_id,year,milestone,intervention_summary,investment_inr,expected_reduction_pct,cumulative_reduction_pct,remaining_emissions_t,provenance
+PM001,2026,Baseline & MRV,"Establish measurement, reporting and verification (MRV) systems; no reduction intervention yet.",2000000,0,0,34030,synthetic_prototype
+PM001,2027,Operational Efficiency,"Idle-time reduction, telematics and haul-route optimization deployed across the fleet.",7000000,17.7,17.7,28009,synthetic_prototype
+PM001,2029,Fleet Transition (Pilot),"Pilot conversion of haul trucks to electric; first tranche of solar/renewable electricity.",30000000,13.3,31.0,23481,synthetic_prototype
+PM001,2030,Target Milestone,"Consolidation of prior interventions; expanded renewable electricity share.",15000000,6.0,37.0,21439,synthetic_prototype
+PM001,2035,Deep Decarbonization,"Expanded fleet electrification, methane capture, road-to-rail logistics shift.",60000000,23.0,60.0,13612,synthetic_prototype
+PM001,2040,Residual Emissions Management,"Remaining hard-to-abate emissions addressed via further efficiency and offset evaluation (not yet methodologically defined in this prototype).",20000000,15.0,75.0,8508,synthetic_prototype
+PM002,2026,Baseline & MRV,"Establish measurement, reporting and verification (MRV) systems.",1200000,0,0,17490,synthetic_prototype
+PM002,2028,Operational Efficiency,"Idle-time reduction and telematics for underground haulage and ventilation fleet.",5000000,14.0,14.0,15041,synthetic_prototype
+PM002,2032,Electrification & Renewables,"Partial electrification of underground haulage; renewable electricity procurement.",25000000,20.0,34.0,11543,synthetic_prototype
+PM002,2040,Residual Emissions Management,"Remaining hard-to-abate emissions addressed via further efficiency measures.",15000000,18.0,52.0,8395,synthetic_prototype
+PM003,2026,Baseline & MRV,"Establish measurement, reporting and verification (MRV) systems.",1500000,0,0,25100,synthetic_prototype
+PM003,2028,Operational Efficiency,"Idle-time reduction, telematics and haul-route optimization.",6500000,16.0,16.0,21084,synthetic_prototype
+PM003,2031,Fleet Transition & Solar,"Pilot electric haul trucks and on-site solar electricity.",28000000,19.0,35.0,16315,synthetic_prototype
+PM003,2040,Residual Emissions Management,"Remaining hard-to-abate emissions addressed via further efficiency measures.",18000000,20.0,55.0,11295,synthetic_prototype

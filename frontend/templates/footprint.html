@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Carbon Footprint{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <div class="eyebrow">Step 01 &middot; Measure</div>
+    <h1>Carbon Footprint</h1>
+    <p class="lede">Scope 1, Scope 2 and selected Scope 3 emissions, carbon intensity, and how each figure is calculated from activity data.</p>
+  </div>
+  <div>
+    <label for="mine-select">Mine</label>
+    <select id="mine-select" aria-label="Select mine"></select>
+  </div>
+</div>
+
+<div id="provenance-strip" class="provenance-strip"><span class="loading-text">Loading data status&hellip;</span></div>
+
+<div id="footprint-body">
+  <div class="loading-text">Loading carbon footprint&hellip;</div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/footprint.js') }}"></script>
+{% endblock %}

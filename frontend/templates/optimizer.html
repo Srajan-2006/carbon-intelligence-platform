@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Decarbonization Optimizer{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <div class="eyebrow">Step 04 &middot; Optimize</div>
+    <h1>Decarbonization Optimizer</h1>
+    <p class="lede">Given a mine, an investment budget and a reduction target, find the minimum-cost combination of interventions that is actually feasible.</p>
+  </div>
+</div>
+
+<div class="contour-hero">
+  <svg class="contour-bg" viewBox="0 0 800 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="none" stroke="#6B7570" stroke-width="1">
+      <path d="M0,150 C150,110 250,190 400,140 C550,90 650,170 800,120"/>
+      <path d="M0,170 C150,130 250,210 400,160 C550,110 650,190 800,140"/>
+      <path d="M0,190 C150,150 250,230 400,180 C550,130 650,210 800,160"/>
+      <path d="M0,130 C150,90 250,170 400,120 C550,70 650,150 800,100"/>
+    </g>
+  </svg>
+  <div class="contour-content">
+    <form id="optimizer-form" class="form-row">
+      <div>
+        <label for="opt-mine">Mine</label>
+        <select id="opt-mine" aria-label="Select mine"></select>
+      </div>
+      <div>
+        <label for="opt-budget">Investment Budget (INR)</label>
+        <input id="opt-budget" type="number" min="0" step="100000" value="100000000" aria-label="Investment budget in rupees">
+      </div>
+      <div>
+        <label for="opt-target">Target Reduction (%)</label>
+        <input id="opt-target" type="number" min="0" max="100" step="1" value="30" aria-label="Target reduction percentage">
+      </div>
+      <div>
+        <button type="submit" id="opt-submit">Optimize</button>
+      </div>
+    </form>
+    <p class="footnote" id="opt-budget-readable" style="margin-top:0.7rem;"></p>
+  </div>
+</div>
+
+<div id="optimizer-result">
+  <div class="empty-text">Set a mine, budget and target above, then click Optimize. Results are computed live by the backend optimizer — nothing here is pre-filled.</div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/optimizer.js') }}"></script>
+{% endblock %}

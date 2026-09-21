@@ -1,0 +1,4 @@
+mine_id,mine_name,company,state,mine_type,annual_production_t,provenance,notes
+PM001,Patharkhera Opencast Mine,Prototype Coal Co.,Madhya Pradesh,Opencast,1200000,synthetic_prototype,"Primary demo mine. All operational figures are fabricated for prototype demonstration; no real mine-level data was used."
+PM002,Deepside Underground Mine,Prototype Coal Co.,Jharkhand,Underground,650000,synthetic_prototype,"Secondary demo mine, illustrates multi-mine capability. Fabricated figures."
+PM003,Ridgeway Opencast Mine,Prototype Coal Co.,Odisha,Opencast,900000,synthetic_prototype,"Secondary demo mine, illustrates multi-mine capability. Fabricated figures."

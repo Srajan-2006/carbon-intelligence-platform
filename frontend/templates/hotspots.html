@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Hotspot Analysis{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <div class="eyebrow">Step 02 &middot; Diagnose</div>
+    <h1>Hotspot Analysis</h1>
+    <p class="lede">Where this mine's emissions are concentrated, ranked by source — answering "what should this mine focus on first?"</p>
+  </div>
+  <div>
+    <label for="mine-select">Mine</label>
+    <select id="mine-select" aria-label="Select mine"></select>
+  </div>
+</div>
+
+<div id="hotspots-body">
+  <div class="loading-text">Loading hotspot analysis&hellip;</div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/hotspots.js') }}"></script>
+{% endblock %}

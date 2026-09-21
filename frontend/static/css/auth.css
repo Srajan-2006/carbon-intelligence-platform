@@ -1,0 +1,101 @@
+/* Auth pages: dark graphite/terrain environment, distinct from the light app shell */
+
+.auth-body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--sidebar-bg);
+}
+
+.auth-shell {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  min-height: 100vh;
+}
+@media (max-width: 860px) {
+  .auth-shell { grid-template-columns: 1fr; }
+  .auth-terrain { min-height: 220px; }
+}
+
+.auth-terrain {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #171B18 0%, #10130F 100%);
+  display: flex;
+  align-items: center;
+  padding: 3rem;
+}
+.terrain-svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.7; }
+.auth-brand { position: relative; z-index: 1; color: #EEF1EC; }
+.auth-brand-mark {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.35em;
+  color: var(--good);
+  border: 1px solid var(--good);
+  display: inline-block;
+  padding: 0.3em 0.7em;
+  margin-bottom: 1.4rem;
+}
+.auth-brand-title {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+.auth-brand-sub {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--sidebar-ink-dim);
+  letter-spacing: 0.03em;
+  margin-bottom: 2rem;
+  max-width: 34ch;
+}
+.auth-brand-note {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  color: var(--prov-provisional);
+  border-left: 2px solid var(--prov-provisional);
+  padding-left: 0.7em;
+}
+
+.auth-panel {
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+}
+.auth-heading {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.3em;
+}
+.auth-subheading {
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.6rem;
+}
+.auth-error {
+  background: var(--bad-bg);
+  color: var(--bad);
+  border: 1px solid var(--bad);
+  border-radius: var(--radius-sm);
+  padding: 0.7em 0.9em;
+  font-size: 0.85rem;
+  margin-bottom: 1.2rem;
+}
+.auth-switch {
+  margin-top: 1.4rem;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+.auth-switch a { color: var(--good); font-weight: 600; text-decoration: none; }
+.auth-switch a:hover { text-decoration: underline; }

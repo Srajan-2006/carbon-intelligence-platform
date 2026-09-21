@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Mine Management{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <div class="eyebrow">Mine Management</div>
+    <h1>Mine Management</h1>
+    <p class="lede">Create and maintain mine identity records. Operational data entry and CSV import are managed separately, per mine.</p>
+  </div>
+  {% if current_user and current_user.role == 'ADMIN' %}
+  <div>
+    <button type="button" id="add-mine-btn">+ Add Mine</button>
+  </div>
+  {% endif %}
+</div>
+
+<div id="mm-role-banner" class="provenance-strip" style="display:none;"></div>
+
+<div id="mm-body">
+  <div class="loading-text">Loading mines&hellip;</div>
+</div>
+
+<!-- Add/Edit Mine modal-style panel (inline, not a JS framework dialog) -->
+<div id="mine-form-overlay" style="display:none; position:fixed; inset:0; background:rgba(23,27,24,0.55); z-index:50; align-items:center; justify-content:center;">
+  <div class="card" style="width:100%; max-width:560px; max-height:88vh; overflow-y:auto;">
+    <div class="card-header">
+      <h3 id="mine-form-title">Add Mine</h3>
+      <button type="button" id="mine-form-close" class="btn-secondary" style="padding:0.3em 0.7em;">&times;</button>
+    </div>
+    <div id="mine-form-error" class="auth-error" hidden style="margin-bottom:1rem;"></div>
+    <form id="mine-form">
+      <input type="hidden" id="mf-mode" value="create">
+      <label for="mf-mine-id">Mine Code</label>
+      <input id="mf-mine-id" type="text" maxlength="20" placeholder="e.g. MM004" required>
+      <p class="footnote" id="mf-mine-id-hint" style="margin:0.3em 0 0;">Letters, numbers, hyphens, underscores. Cannot be changed after creation.</p>
+
+      <label for="mf-mine-name" style="margin-top:1em;">Mine Name</label>
+      <input id="mf-mine-name" type="text" required>
+
+      <div class="grid-2" style="margin-top:1em;">
+        <div>
+          <label for="mf-state">State / Region</label>
+          <input id="mf-state" type="text">
+        </div>
+        <div>
+          <label for="mf-mine-type">Mine Type</label>
+          <input id="mf-mine-type" type="text" placeholder="Opencast / Underground">
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:1em;">
+        <div>
+          <label for="mf-company">Company</label>
+          <input id="mf-company" type="text">
+        </div>
+        <div>
+          <label for="mf-production">Annual Production (tonnes/yr)</label>
+          <input id="mf-production" type="number" min="0" step="1">
+        </div>
+      </div>
+
+      <label for="mf-provenance" style="margin-top:1em;">Mine Identity Data Status</label>
+      <select id="mf-provenance">
+        <option value="provisional">Provisional (not yet verified)</option>
+        <option value="reference">Reference / Verified</option>
+      </select>
+      <p class="footnote" style="margin:0.3em 0 0;">This describes the mine identity record itself, not its operational emissions data.</p>
+
+      <label for="mf-notes" style="margin-top:1em;">Notes</label>
+      <input id="mf-notes" type="text" maxlength="2000">
+
+      <div id="mf-active-row" style="margin-top:1em; display:none;">
+        <label style="display:flex; align-items:center; gap:0.6em; text-transform:none; font-weight:400; font-size:0.85rem; color:var(--ink);">
+          <input type="checkbox" id="mf-active" style="width:auto;"> Mine is active
+        </label>
+        <p class="footnote" style="margin:0.3em 0 0;">Deactivating hides this mine from the general mine selector without deleting any historical data.</p>
+      </div>
+
+      <button type="submit" id="mine-form-submit" style="width:100%; margin-top:1.4rem;">Save Mine</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/mine_management.js') }}"></script>
+{% endblock %}

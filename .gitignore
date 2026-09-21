@@ -1,0 +1,15 @@
+﻿venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+.flask_secret_key
+flask_secret_key
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+data/.flask_secret_key
+data/mine_carbon.db

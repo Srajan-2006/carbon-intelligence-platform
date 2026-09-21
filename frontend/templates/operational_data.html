@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Operational Data{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <div class="eyebrow">Mine Management &middot; Operational Data</div>
+    <h1>Operational Data — <span class="mono">{{ mine_id }}</span></h1>
+    <p class="lede">Monthly activity inputs that feed the carbon engine directly. Units are fixed to match the calculation model — no silent conversions.</p>
+  </div>
+  <div id="od-write-access">
+    <button type="button" id="add-record-btn" style="display:none;">+ Add Monthly Record</button>
+    <a href="{{ url_for('page_csv_import', mine_id=mine_id) }}" class="btn-secondary" style="text-decoration:none; display:inline-block; margin-left:0.5rem;">Import CSV</a>
+  </div>
+</div>
+
+<div id="od-role-banner" class="provenance-strip" style="display:none;"></div>
+
+<div id="od-save-confirmation" style="display:none;"></div>
+
+<div id="od-body">
+  <div class="loading-text">Loading operational data&hellip;</div>
+</div>
+
+<div id="record-form-overlay" style="display:none; position:fixed; inset:0; background:rgba(23,27,24,0.55); z-index:50; align-items:center; justify-content:center; overflow-y:auto; padding:2rem 1rem;">
+  <div class="card" style="width:100%; max-width:640px;">
+    <div class="card-header">
+      <h3 id="record-form-title">Add Monthly Record</h3>
+      <button type="button" id="record-form-close" class="btn-secondary" style="padding:0.3em 0.7em;">&times;</button>
+    </div>
+    <div id="record-form-error" class="auth-error" hidden style="margin-bottom:1rem;"></div>
+    <form id="record-form">
+      <input type="hidden" id="rf-mode" value="create">
+      <input type="hidden" id="rf-record-id" value="">
+
+      <div class="grid-2">
+        <div>
+          <label for="rf-year">Year</label>
+          <select id="rf-year"></select>
+        </div>
+        <div>
+          <label for="rf-month">Month</label>
+          <select id="rf-month">
+            <option value="01">January</option><option value="02">February</option><option value="03">March</option>
+            <option value="04">April</option><option value="05">May</option><option value="06">June</option>
+            <option value="07">July</option><option value="08">August</option><option value="09">September</option>
+            <option value="10">October</option><option value="11">November</option><option value="12">December</option>
+          </select>
+        </div>
+      </div>
+
+      <hr class="hairline">
+
+      <div id="rf-fields"></div>
+
+      <hr class="hairline">
+
+      <label for="rf-provenance">Data Status</label>
+      <select id="rf-provenance">
+        <option value="measured">Measured (actual reading)</option>
+        <option value="provisional">Provisional (estimate, not yet confirmed)</option>
+      </select>
+
+      <label for="rf-source-type" style="margin-top:1em;">Source Type</label>
+      <select id="rf-source-type">
+        <option value="manual_entry">Manual Entry</option>
+        <option value="sensor">Sensor / Meter</option>
+        <option value="api">API Feed</option>
+      </select>
+
+      <label for="rf-source-note" style="margin-top:1em;">Source Note (optional)</label>
+      <input id="rf-source-note" type="text" maxlength="1000" placeholder="e.g. site diesel log, SCADA export reference">
+
+      <button type="submit" id="record-form-submit" style="width:100%; margin-top:1.4rem;">Save Record</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script>window.MCI_MINE_ID = {{ mine_id|tojson }};</script>
+<script src="{{ url_for('static', filename='js/operational_data.js') }}"></script>
+{% endblock %}

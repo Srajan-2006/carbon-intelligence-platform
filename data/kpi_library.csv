@@ -1,0 +1,10 @@
+kpi_id,kpi_name,description,unit,decision_support_purpose
+KPI_TOTAL_EMISSIONS,Total Emissions,Sum of Scope 1 + Scope 2 + Scope 3 (selected) for the reporting period.,tCO2e,Establishes the baseline magnitude a mine is managing against.
+KPI_SCOPE1,Scope 1 Emissions,Direct emissions from diesel combustion and fugitive methane.,tCO2e,Identifies how much of the footprint is under the mine's direct operational control.
+KPI_SCOPE2,Scope 2 Emissions,Emissions associated with purchased electricity.,tCO2e,Identifies exposure to grid carbon intensity and renewable-procurement opportunity.
+KPI_SCOPE3,Scope 3 Emissions (Selected),Selected indirect emissions from transport and commuting.,tCO2e,Flags indirect/logistics-related reduction opportunities outside direct operations.
+KPI_CARBON_INTENSITY,Carbon Intensity,Total emissions per tonne of coal produced.,tCO2e/t coal,Enables fair comparison across mines of different scale; tracks decoupling of production from emissions.
+KPI_COST_PER_TCO2E,Cost per Tonne CO2e Reduced,Investment required per tonne of CO2e avoided in a given intervention package.,INR/tCO2e,Directly supports investment prioritization decisions.
+KPI_TARGET_ACHIEVEMENT,Target Achievement,Whether the optimizer found a feasible package meeting the stated reduction target within budget.,%/status,Answers the central decision question: can this target be met with this budget.
+KPI_RENEWABLE_SHARE,Renewable Electricity Share,Fraction of purchased electricity sourced from renewables.,%,Tracks progress on the largest lever available for Scope 2 reduction.
+KPI_RESIDUAL_EMISSIONS,Residual Emissions,Emissions remaining after a selected intervention package is applied.,tCO2e,Shows what is left to address in the next planning cycle.
